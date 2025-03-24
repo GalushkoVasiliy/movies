@@ -3,16 +3,16 @@ import { Dimensions, StyleSheet } from "react-native";
 import { useSharedValue } from "react-native-reanimated";
 import Carousel from "react-native-reanimated-carousel";
 import CarouselItem from "./CarouselItem";
-import { CastMember, Movie } from "@/interfaces/interfaces";
+import { CarouselType, CastMember, Movie } from "@/interfaces/interfaces";
 import { HORIZONTAL_STACK_CONFIG_BIG, HORIZONTAL_STACK_CONFIG_SMALL } from "@/config/CONSTANT";
 
 interface HorizontalCarouselProps {
-  type: 'movies' | 'cast';
+  type: CarouselType;
   data?: Movie[] | CastMember[];
 }
 
 const HorizontalCarousel = ({data = [], type}: HorizontalCarouselProps) => {
-  const carouselConfig = type === 'movies' ? HORIZONTAL_STACK_CONFIG_BIG : HORIZONTAL_STACK_CONFIG_SMALL;
+  const carouselConfig = type === CarouselType.MOVIE ? HORIZONTAL_STACK_CONFIG_BIG : HORIZONTAL_STACK_CONFIG_SMALL;
   const progress = useSharedValue<number>(0);
   const renderItem = useCallback(({ item }: { item: any }) => {
     return (<CarouselItem type={type} item={item} />)
