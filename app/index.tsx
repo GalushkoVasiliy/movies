@@ -1,6 +1,6 @@
 import { useGetMoviesByCategoryQuery, useSearchMoviesMutation } from "@/api/api";
 import HorizontalCarousel from "@/components/HorizontalCarousel";
-import { Text, View, ScrollView, TouchableOpacity, StyleSheet, Image } from "react-native";
+import { Text, View, ScrollView, TouchableOpacity, StyleSheet } from "react-native";
 import { useRouter } from 'expo-router';
 import CustomHeader from "@/components/CustomHeader";
 import Search from "@/components/Search";
@@ -10,6 +10,7 @@ import HeaderButton from "@/components/HeaderButton";
 import { useState } from "react";
 import VerticalList from "@/components/VerticalList";
 import { CarouselType, Movie, MovieCategory } from "@/interfaces/interfaces";
+import { Image } from 'expo-image';
 
 export default function Index() {
   const popularFilms = useGetMoviesByCategoryQuery(MovieCategory.POPULAR);

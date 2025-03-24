@@ -3,7 +3,7 @@ import { useFetchMovieByIdMutation, useGetSingleFilmCreditsMutation } from "@/ap
 import { CarouselType, CastMember, MovieDetails } from "@/interfaces/interfaces";
 import { useLocalSearchParams } from "expo-router";
 import { useEffect } from "react";
-import { View, Text, Image, ScrollView, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, ScrollView, StyleSheet, TouchableOpacity } from "react-native";
 import Ionicons from '@expo/vector-icons/Ionicons';
 import CustomHeader from "@/components/CustomHeader";
 import { IMAGE_URI_BIG_SIZE } from '@/config/CONSTANT';
@@ -13,6 +13,7 @@ import { useToggleFavorite } from '@/hooks/useToggleFavoriteHook';
 import COLORS from '@/config/COLORS';
 import HeaderButton from '@/components/HeaderButton';
 import moment from 'moment';
+import { Image } from 'expo-image';
 
 const Details = () => {
   const { id } = useLocalSearchParams();
@@ -48,7 +49,7 @@ const Details = () => {
       </View>
 
       <ScrollView showsVerticalScrollIndicator={false} style={styles.scrollContainer}>
-        <Image resizeMode='cover' source={{uri: `${IMAGE_URI_BIG_SIZE}${movie?.poster_path}`}} style={{width: '100%', height: 660}} />
+        <Image contentFit="cover" source={{uri: `${IMAGE_URI_BIG_SIZE}${movie?.poster_path}`}} style={{width: '100%', height: 660}} />
         <Shadow
           distance={80}
           startColor="rgba(12, 17, 23, 1)"

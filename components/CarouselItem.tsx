@@ -1,7 +1,8 @@
 import { useRouter } from "expo-router";
-import { View, Image, StyleSheet, TouchableOpacity, Text } from "react-native";
+import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
 import { IMAGE_URI_BIG_SIZE } from "@/config/CONSTANT";
 import { CarouselType, CastMember, Movie } from "@/interfaces/interfaces";
+import { Image } from 'expo-image';
 
 interface CarouselItemProps {
   item: Movie | CastMember;
@@ -19,7 +20,7 @@ const CarouselItem: React.FC<CarouselItemProps> = (props) => {
         <Image
           source={{ uri: `${IMAGE_URI_BIG_SIZE}${props?.item?.poster_path}` }}
           style={styles.image}
-          resizeMode="cover"
+          contentFit="cover"
         />
       </View>      
     </TouchableOpacity>
@@ -31,7 +32,7 @@ const CarouselItem: React.FC<CarouselItemProps> = (props) => {
       <Image
         source={props?.item?.profile_path ? { uri: `${IMAGE_URI_BIG_SIZE}${props?.item?.profile_path}` } : require('@/assets/images/unknown_person.jpg')}
         style={styles.smallImage}
-        resizeMode="cover"
+        contentFit="cover"
       />
       <Text style={styles.text}>{props?.item?.name}</Text>
       <Text style={styles.text}>{props?.item?.popularity?.toFixed(2)}</Text>

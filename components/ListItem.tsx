@@ -1,10 +1,11 @@
 import { Movie } from "@/interfaces/interfaces";
 import { useRouter } from "expo-router";
-import { TouchableOpacity, View, Image, Text, StyleSheet } from "react-native";
+import { TouchableOpacity, View, Text, StyleSheet } from "react-native";
 import moment from 'moment';
 import { IMAGE_URI_SMALL_SIZE } from "@/config/CONSTANT";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import COLORS from "@/config/COLORS";
+import { Image } from 'expo-image';
 
 const ListItem = ({ item }: { item: Movie }) => {
   const router = useRouter();

@@ -7,7 +7,8 @@ import { IMAGE_URI_SMALL_SIZE } from '@/config/CONSTANT';
 import { Movie } from '@/interfaces/interfaces';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import React, { useCallback, useEffect } from 'react';
-import { View, Image, StyleSheet, FlatList, Text, ActivityIndicator } from 'react-native';
+import { View, StyleSheet, FlatList, Text, ActivityIndicator } from 'react-native';
+import { Image } from 'expo-image';
 
 const Actor: React.FC = () => {
   const { id } = useLocalSearchParams();
