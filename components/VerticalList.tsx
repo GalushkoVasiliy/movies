@@ -38,7 +38,7 @@ const VerticalList: React.FC<VerticalListProps> = ({
         ) : undefined
       }
       onEndReached={onLoadMore}
-      onEndReachedThreshold={0.5}
+      onEndReachedThreshold={0.8}
     />
   );
 };

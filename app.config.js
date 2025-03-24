@@ -43,7 +43,10 @@ export default {
     extra: {
       API_URL: process.env.API_URL,
       API_KEY: process.env.API_KEY,
-      IMAGE_URL: process.env.IMAGE_URL
+      IMAGE_URL: process.env.IMAGE_URL,
+      eas: {
+        projectId: "f4ba2c05-e264-440b-aa58-8d5244a4251b"
+      }
     },
   },
 };

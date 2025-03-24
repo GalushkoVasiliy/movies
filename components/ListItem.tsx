@@ -13,7 +13,7 @@ const ListItem = ({ item }: { item: Movie }) => {
     <TouchableOpacity
       style={styles.container}
       activeOpacity={1}
-      onPress={() => router.push({ pathname: "/details", params: { id: item.id } })}>
+      onPress={() => router.push({ pathname: "/FilmDetails", params: { id: item.id } })}>
       <View style={styles.content}>
         <Image
           source={{ uri: `${IMAGE_URI_SMALL_SIZE}${item.poster_path}` }}

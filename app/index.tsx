@@ -21,7 +21,7 @@ export default function Index() {
   const [searchResult, setSearchResult] = useState<Movie[]>([]);
 
   const navigateToFavorite = () => {
-    router.push({ pathname: '/favorite', params: { type: 'favorite' } });
+    router.push({ pathname: '/FavoriteList', params: { type: 'favorite' } });
   }
 
   const search = async (string: any) => {
@@ -64,7 +64,7 @@ export default function Index() {
             <View style={styles.groupHeaderContainer}>
               <Text style={styles.groupTitle}>Popular</Text>
               <TouchableOpacity onPress={() => {
-                router.push({ pathname: '/list', params: { type: 'popular' } });
+                router.push({ pathname: '/FilmsList', params: { type: 'popular' } });
               }}>
                 <Text style={styles.seeAllButton}>View all</Text>
               </TouchableOpacity>
@@ -76,7 +76,7 @@ export default function Index() {
             <View style={styles.groupHeaderContainer}>
               <Text style={styles.groupTitle}>Top Rated</Text>
               <TouchableOpacity onPress={() => {
-                router.push({ pathname: '/list', params: { type: 'top_rated' } });
+                router.push({ pathname: '/FilmsList', params: { type: 'top_rated' } });
               }}>
                 <Text style={styles.seeAllButton}>View all</Text>
               </TouchableOpacity>

@@ -13,7 +13,7 @@ const CarouselItem: React.FC<CarouselItemProps> = (props) => {
   return props.type === 'movies' ? (
     <TouchableOpacity
       activeOpacity={1}
-      onPress={() => router.push({ pathname: '/details', params: { id: props?.item?.id } })}
+      onPress={() => router.push({ pathname: '/FilmDetails', params: { id: props?.item?.id } })}
       style={styles.container}>
       <View style={styles.movieWrapper}>
         <Image
@@ -25,7 +25,8 @@ const CarouselItem: React.FC<CarouselItemProps> = (props) => {
     </TouchableOpacity>
   ) : (
     <TouchableOpacity
-      onPress={() => router.push({ pathname: '/actor', params: { id: props?.item?.id } })}
+      activeOpacity={1}
+      onPress={() => router.push({ pathname: '/Actor', params: { id: props?.item?.id } })}
       style={styles.smallContainer}>
       <Image
         source={props?.item?.profile_path ? { uri: `${IMAGE_URI_BIG_SIZE}${props?.item?.profile_path}` } : require('@/assets/images/unknown_person.jpg')}
@@ -33,7 +34,7 @@ const CarouselItem: React.FC<CarouselItemProps> = (props) => {
         resizeMode="cover"
       />
       <Text style={styles.text}>{props?.item?.name}</Text>
-      <Text style={styles.text}>{props?.item?.popularity}</Text>
+      <Text style={styles.text}>{props?.item?.popularity?.toFixed(2)}</Text>
     </TouchableOpacity>
   );
 }

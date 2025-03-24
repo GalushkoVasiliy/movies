@@ -36,10 +36,10 @@ export default function RootLayout() {
             headerTintColor: COLORS.white,
           }}>
           <Stack.Screen name="index" options={{ title: 'Main', headerShown: false }} />
-          <Stack.Screen name="details" options={{ title: 'Movie Details', headerShown: false }} />
-          <Stack.Screen name="list" options={{ title: 'Movies List', headerShown: false }} />
-          <Stack.Screen name="favorite" options={{ title: 'Favorite List', headerShown: false }} />
-          <Stack.Screen name="actor" options={{ title: 'Favorite List', headerShown: false }} />
+          <Stack.Screen name="FilmDetails" options={{ title: 'Movie Details', headerShown: false }} />
+          <Stack.Screen name="FilmsList" options={{ title: 'Movies List', headerShown: false }} />
+          <Stack.Screen name="FavoriteList" options={{ title: 'Favorite List', headerShown: false }} />
+          <Stack.Screen name="Actor" options={{ title: 'Favorite List', headerShown: false }} />
         </Stack>
       </PersistGate>
     </Provider>
