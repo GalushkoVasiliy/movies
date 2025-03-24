@@ -21,7 +21,7 @@ export default function Index() {
   const [searchResult, setSearchResult] = useState<Movie[]>([]);
 
   const navigateToFavorite = () => {
-    router.push({ pathname: '/FavoriteList', params: { type: 'favorite' } });
+    router.push({ pathname: '/FavoriteList' });
   }
 
   const search = async (string: any) => {

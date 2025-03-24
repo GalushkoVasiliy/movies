@@ -3,7 +3,7 @@ import { useFetchMovieByIdMutation, useGetSingleFilmCreditsMutation } from "@/ap
 import { CarouselType, CastMember, MovieDetails } from "@/interfaces/interfaces";
 import { useLocalSearchParams } from "expo-router";
 import { useEffect } from "react";
-import { View, Text, Image, ScrollView, StyleSheet } from "react-native";
+import { View, Text, Image, ScrollView, StyleSheet, TouchableOpacity } from "react-native";
 import Ionicons from '@expo/vector-icons/Ionicons';
 import CustomHeader from "@/components/CustomHeader";
 import { IMAGE_URI_BIG_SIZE } from '@/config/CONSTANT';
@@ -69,9 +69,11 @@ const Details = () => {
 
           <View style={styles.genreContainer}>
             {movie?.genres.map((genre: {id: number; name: string}) => (
-              <View key={genre.id} style={styles.genreBadge}>
+              <TouchableOpacity
+                onPress={() => router.push({pathname: '/FilmsList', params: {genreId: genre.id, genreName: genre.name}})}
+                key={genre.id} style={styles.genreBadge}>
                 <Text style={styles.genreText}>{genre.name}</Text>
-              </View>
+              </TouchableOpacity>
             ))}
           </View>
           <Text style={styles.overview}>{movie?.overview}</Text>

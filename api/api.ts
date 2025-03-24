@@ -27,6 +27,10 @@ export const filmsApi = createApi({
         method: 'GET',
       }),
     }),
+    fetchMoviesByGenre: builder.mutation({
+      query: ({ genreId, page }) =>
+        `discover/movie?with_genres=${genreId}&page=${page}`,
+    }),
     getSingleFilmCredits: builder.mutation({
       query: (id) => `movie/${id}/credits`,
     }),
@@ -46,6 +50,7 @@ export const filmsApi = createApi({
 });
 
 export const {
+  useFetchMoviesByGenreMutation,
   useGetMoviesByPersonMutation,
   useGetPersonByIdMutation,
   useGetGenresMutation,

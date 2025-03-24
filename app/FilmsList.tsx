@@ -1,6 +1,6 @@
-import { useFetchMoviesByCategoryMutation } from "@/api/api";
+import { useFetchMoviesByCategoryMutation, useFetchMoviesByGenreMutation } from "@/api/api";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { StyleSheet, View, Text } from "react-native";
 import VerticalList from "@/components/VerticalList";
 import CustomHeader from "@/components/CustomHeader";
@@ -8,9 +8,17 @@ import COLORS from "@/config/COLORS";
 import HeaderButton from "@/components/HeaderButton";
 import { MovieCategory } from "@/interfaces/interfaces";
 
+type ListParams = {
+  type?: MovieCategory;
+  genreId?: string;
+  genreName?: string;
+};
+
 const List = () => {
-  const { type } = useLocalSearchParams() as { type: MovieCategory };
+  const { type, genreId, genreName } = useLocalSearchParams<ListParams>();
   const [fetchMoviesByCategory] = useFetchMoviesByCategoryMutation();
+  const [fetchMoviesByGenre] = useFetchMoviesByGenreMutation();
+
   const router = useRouter();
 
   const [movies, setMovies] = useState([]);
@@ -22,8 +30,13 @@ const List = () => {
     pageNumber = 1,
     isRefreshing = false
   ) => {
+    let response: Awaited<ReturnType<typeof fetchMoviesByCategory | typeof fetchMoviesByGenre>>['data'];
     try {
-      const response = await fetchMoviesByCategory({ category: type, page: pageNumber }).unwrap();
+      if (type) {
+        response = await fetchMoviesByCategory({ category: type, page: pageNumber }).unwrap();
+      } else if (genreId) {
+        response = await fetchMoviesByGenre({ genreId, page: pageNumber }).unwrap();
+      }
   
       if (!response?.results) {
         console.warn("No results in response", response);
@@ -50,15 +63,17 @@ const List = () => {
     setRefreshing(false);
   };
 
-  const onLoadMore = async () => {
-    if (!loadingMore) {
-      setLoadingMore(true);
-      const nextPage = page + 1;
-      await loadMovies(nextPage);
-      setPage(nextPage);
-      setLoadingMore(false);
-    }
-  };
+  const onLoadMore = useCallback(async () => {
+    if (loadingMore) return;
+  
+    setLoadingMore(true);
+  
+    const nextPage = page + 1;
+    await loadMovies(nextPage);
+  
+    setPage((prev) => prev + 1);
+    setLoadingMore(false);
+  }, [page]);
 
   return (
     <View style={styles.container}>
@@ -66,7 +81,7 @@ const List = () => {
         leftContent={<HeaderButton iconName='arrow-back' onPress={() => router.back()} />}
         centerContent={
           <View style={styles.titleContainer}>
-            <Text style={styles.title}>{type}</Text>
+            <Text style={styles.title}>{type || genreName}</Text>
           </View>
         }
         rightContent={
