@@ -1,4 +1,4 @@
-import { useFetchPopularMoviesMutation, useFetchTopRatedMoviesMutation } from "@/api/api";
+import { useFetchMoviesByCategoryMutation } from "@/api/api";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import { StyleSheet, View, Text } from "react-native";
@@ -9,9 +9,8 @@ import HeaderButton from "@/components/HeaderButton";
 import { MovieCategory } from "@/interfaces/interfaces";
 
 const List = () => {
-  const { type } = useLocalSearchParams();
-  const [fetchPopularMovies] = useFetchPopularMoviesMutation();
-  const [fetchTopRatedMovies] = useFetchTopRatedMoviesMutation();
+  const { type } = useLocalSearchParams() as { type: MovieCategory };
+  const [fetchMoviesByCategory] = useFetchMoviesByCategoryMutation();
   const router = useRouter();
 
   const [movies, setMovies] = useState([]);
@@ -19,23 +18,21 @@ const List = () => {
   const [refreshing, setRefreshing] = useState(false);
   const [loadingMore, setLoadingMore] = useState(false);
 
-  const loadMovies = async (pageNumber = 1, isRefreshing = false) => {
+  const loadMovies = async (
+    pageNumber = 1,
+    isRefreshing = false
+  ) => {
     try {
-      let response;
-      
-      if (type === MovieCategory.POPULAR) {
-        response = await fetchPopularMovies(pageNumber).unwrap();
-      } else if (type === MovieCategory.TOP_RATED) {
-        response = await fetchTopRatedMovies(pageNumber).unwrap();
+      const response = await fetchMoviesByCategory({ category: type, page: pageNumber }).unwrap();
+  
+      if (!response?.results) {
+        console.warn("No results in response", response);
+        return;
       }
-    
-      if (response?.results) {
-        setMovies((prevMovies) => 
-          isRefreshing ? response.results : [...prevMovies, ...response.results]
-        );
-      } else {
-        console.error("Error: response.results is undefined", response);
-      }
+  
+      setMovies(prev =>
+        isRefreshing ? response.results : [...prev, ...response.results]
+      );
     } catch (error) {
       console.error("Error loading movies:", error);
     }

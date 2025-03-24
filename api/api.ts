@@ -1,3 +1,4 @@
+import { MovieCategory } from '@/interfaces/interfaces';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import Constants from 'expo-constants';
 const { API_URL, API_KEY } = Constants.expoConfig?.extra || {};
@@ -13,23 +14,12 @@ export const filmsApi = createApi({
     },
   }),
   endpoints: (builder) => ({
-    getPopularMovies: builder.query({
-      query: () => 'movie/popular',
+    getMoviesByCategory: builder.query({
+      query: (category: MovieCategory) => `movie/${category}`,
     }),
-    getTopRatedMovies: builder.query({
-      query: () => 'movie/top_rated',
-    }),
-    fetchPopularMovies: builder.mutation({
-      query: (page) => ({
-        url: `movie/popular?page=${page}`,
-        method: 'GET',
-      }),
-    }),
-    fetchTopRatedMovies: builder.mutation({
-      query: (page) => ({
-        url: `movie/top_rated?page=${page}`,
-        method: 'GET',
-      }),
+    fetchMoviesByCategory: builder.mutation({
+      query: ({ category, page }: { category: MovieCategory; page: number }) => 
+        `movie/${category}?page=${page}`,
     }),
     fetchMovieById: builder.mutation({
       query: (id) => ({
@@ -61,9 +51,7 @@ export const {
   useGetGenresMutation,
   useSearchMoviesMutation,
   useGetSingleFilmCreditsMutation,
-  useGetPopularMoviesQuery,
-  useGetTopRatedMoviesQuery,
-  useFetchPopularMoviesMutation,
-  useFetchTopRatedMoviesMutation,
+  useGetMoviesByCategoryQuery,
+  useFetchMoviesByCategoryMutation,
   useFetchMovieByIdMutation
 } = filmsApi;

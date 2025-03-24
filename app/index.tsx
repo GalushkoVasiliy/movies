@@ -1,4 +1,4 @@
-import { useGetPopularMoviesQuery, useGetTopRatedMoviesQuery, useSearchMoviesMutation } from "@/api/api";
+import { useGetMoviesByCategoryQuery, useSearchMoviesMutation } from "@/api/api";
 import HorizontalCarousel from "@/components/HorizontalCarousel";
 import { Text, View, ScrollView, TouchableOpacity, StyleSheet, Image } from "react-native";
 import { useRouter } from 'expo-router';
@@ -13,8 +13,8 @@ import VerticalList from "@/components/VerticalList";
 import { CarouselType, Movie, MovieCategory } from "@/interfaces/interfaces";
 
 export default function Index() {
-  const popularFilms = useGetPopularMoviesQuery('');
-  const topRatedFilms = useGetTopRatedMoviesQuery('');
+  const popularFilms = useGetMoviesByCategoryQuery(MovieCategory.POPULAR);
+  const topRatedFilms = useGetMoviesByCategoryQuery(MovieCategory.TOP_RATED);
   const [searchMovies, searchMoviesResult] = useSearchMoviesMutation();
   const router = useRouter();
 
