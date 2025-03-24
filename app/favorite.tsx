@@ -21,7 +21,7 @@ const Favorite: React.FC = () => {
             <Text style={styles.title}>Favorite</Text>
           </View>
         }
-        rightContent={<View />}
+        rightContent={<View style={styles.emptyButton} />}
       />
       <View style={styles.listContainer}>
         <VerticalList
@@ -33,6 +33,9 @@ const Favorite: React.FC = () => {
 };
 
 const styles = StyleSheet.create({
+  emptyButton: {
+    width: 40,
+  },
   titleContainer: { justifyContent: 'center', alignItems: 'center', height: 40, },
   title: {
     fontSize: 16,

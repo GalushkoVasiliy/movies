@@ -1,6 +1,6 @@
 import { Shadow } from 'react-native-shadow-2';
 import { useFetchMovieByIdMutation, useGetSingleFilmCreditsMutation } from "@/api/api";
-import { MovieCredits, MovieDetails } from "@/interfaces/interfaces";
+import { CastMember, MovieDetails } from "@/interfaces/interfaces";
 import { useLocalSearchParams } from "expo-router";
 import { useEffect } from "react";
 import { View, Text, Image, ScrollView, StyleSheet } from "react-native";
@@ -24,7 +24,7 @@ const Details = () => {
   const { isFavorite, toggleFavorite } = useToggleFavorite(fetchMovieByIdResult?.data);
 
   const movie: MovieDetails = fetchMovieByIdResult?.data;
-  const movieCredits: MovieCredits = fetchCreditsResult?.data?.cast || [];
+  const movieCredits: CastMember[] = fetchCreditsResult?.data?.cast || [];
 
   useEffect(() => {
     if (id) {
@@ -48,7 +48,7 @@ const Details = () => {
       </View>
 
       <ScrollView showsVerticalScrollIndicator={false} style={styles.scrollContainer}>
-        <Image resizeMode='contain' source={{uri: `${IMAGE_URI_BIG_SIZE}${movie?.poster_path}`}} style={{width: '100%', height: 660}} />
+        <Image resizeMode='cover' source={{uri: `${IMAGE_URI_BIG_SIZE}${movie?.poster_path}`}} style={{width: '100%', height: 660}} />
         <Shadow
           distance={80}
           startColor="rgba(12, 17, 23, 1)"
@@ -79,7 +79,7 @@ const Details = () => {
             <Text style={styles.castTitle}>Cast</Text>
             <HorizontalCarousel
               type="cast"
-              data={movieCredits?.cast || []}
+              data={movieCredits || []}
             />
           </View>
         </View>
@@ -104,7 +104,6 @@ const styles = StyleSheet.create({
     position: "absolute",
     zIndex: 100,
     width: "100%",
-    backgroundColor: "transparent",
   },
   scrollContainer: {
     flex: 1,

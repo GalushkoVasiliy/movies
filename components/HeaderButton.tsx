@@ -10,7 +10,7 @@ interface HeaderButtonProps {
 
 const HeaderButton: React.FC<HeaderButtonProps> = ({ onPress, iconName }) => {
   return (
-    <BlurView intensity={50} style={styles.blurContainer}>
+    <BlurView intensity={90} style={styles.blurContainer}>
       <TouchableOpacity onPress={onPress} style={styles.headerButton}>
         <Ionicons name={iconName} size={25} color="white" />
       </TouchableOpacity>

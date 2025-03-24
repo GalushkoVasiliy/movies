@@ -1,4 +1,4 @@
-import 'dotenv/config';
+require('dotenv').config()
 
 export default {
   expo: {
@@ -14,6 +14,7 @@ export default {
       supportsTablet: true,
     },
     android: {
+      package: 'com.movies',
       adaptiveIcon: {
         foregroundImage: './assets/images/adaptive-icon.png',
         backgroundColor: '#ffffff',

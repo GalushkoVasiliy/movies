@@ -28,7 +28,7 @@ export default function RootLayout() {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <StatusBar barStyle="light-content" />
+        <StatusBar translucent backgroundColor="transparent"  barStyle="light-content" />
         <Stack
           initialRouteName='index'
           screenOptions={{

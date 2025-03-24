@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react';
-import { View, StyleSheet, ViewStyle } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 interface CustomHeaderProps {
   leftContent?: ReactNode;
@@ -14,9 +15,11 @@ const CustomHeader: React.FC<CustomHeaderProps> = ({
   centerContent,
   additionalContent
 }) => {
+  const insets = useSafeAreaInsets();
+
   return (
     <View>
-      <View style={[styles.container]}>
+      <View style={[styles.container, {height: 40 + insets.top}]}>
         {leftContent}
         {centerContent}
         {rightContent}
@@ -35,7 +38,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     alignItems: 'flex-end',
     justifyContent: 'space-between',
-    height: 100,
     flexDirection: 'row',
   },
 });

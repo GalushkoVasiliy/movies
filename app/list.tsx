@@ -1,11 +1,9 @@
 import { useFetchPopularMoviesMutation, useFetchTopRatedMoviesMutation } from "@/api/api";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useEffect, useState } from "react";
-import { StyleSheet, TouchableOpacity, View, Text } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 import VerticalList from "@/components/VerticalList";
 import CustomHeader from "@/components/CustomHeader";
-import { BlurView } from "expo-blur";
-import Ionicons from "@expo/vector-icons/Ionicons";
 import COLORS from "@/config/COLORS";
 import HeaderButton from "@/components/HeaderButton";
 
@@ -70,7 +68,7 @@ const List = () => {
         leftContent={<HeaderButton iconName='arrow-back' onPress={() => router.back()} />}
         centerContent={
           <View style={styles.titleContainer}>
-            <Text style={styles.title}>Favorite</Text>
+            <Text style={styles.title}>{type}</Text>
           </View>
         }
         rightContent={
@@ -100,6 +98,8 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     fontFamily: 'Montserrat',
     color: COLORS.white,
+    textTransform: 'capitalize',
+    paddingHorizontal: 10
   },
   container: {
     flex: 1,
