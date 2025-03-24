@@ -5,7 +5,6 @@ import { useRouter } from 'expo-router';
 import CustomHeader from "@/components/CustomHeader";
 import Search from "@/components/Search";
 import { BlurView } from "expo-blur";
-// import Filters from "@/components/Filters";
 import COLORS from "@/config/COLORS";
 import HeaderButton from "@/components/HeaderButton";
 import { useState } from "react";
@@ -31,16 +30,10 @@ export default function Index() {
     }
   }
 
-  // const filter = () => {
-
-  // }
-
   return (
     <View style={styles.wrapper}>
-      {/* <Filters /> */}
       <CustomHeader
-        // leftContent={<HeaderButton iconName='filter' onPress={filter} />}
-        rightContent={<HeaderButton iconName='bookmark' onPress={navigateToFavorite} />
+        leftContent={<HeaderButton iconName='bookmark' onPress={navigateToFavorite} />
         }
         additionalContent={
           <BlurView intensity={20} style={styles.searchContainer}>
