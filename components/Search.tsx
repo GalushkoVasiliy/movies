@@ -2,6 +2,7 @@ import COLORS from '@/config/COLORS';
 import React, { useState } from 'react';
 import { View, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import HeaderButton from './HeaderButton';
 
 interface SearchProps {
   onPress: (search: string) => void;
@@ -29,17 +30,14 @@ const Search: React.FC<SearchProps> = ({onPress, clearSearch}) => {
           <Ionicons name="close" size={25} color="white" />
         </TouchableOpacity>
       )}
-      <TouchableOpacity
-        onPress={() => onPress(query)}>
-        <Ionicons name="search" size={25} color="white" />
-      </TouchableOpacity>
+      <HeaderButton onPress={() => onPress(query)} iconName='search' />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 15,
+    paddingLeft: 15,
     width: '100%',
     marginBottom: 20,
     flexDirection: 'row',
@@ -47,7 +45,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   input: {
-    height: 50,
+    height: 40,
     color: COLORS.white,
     flex: 1,
     fontFamily: 'Montserrat'
