@@ -6,6 +6,7 @@ import VerticalList from "@/components/VerticalList";
 import CustomHeader from "@/components/CustomHeader";
 import COLORS from "@/config/COLORS";
 import HeaderButton from "@/components/HeaderButton";
+import { MovieCategory } from "@/interfaces/interfaces";
 
 const List = () => {
   const { type } = useLocalSearchParams();
@@ -22,9 +23,9 @@ const List = () => {
     try {
       let response;
       
-      if (type === "popular") {
+      if (type === MovieCategory.POPULAR) {
         response = await fetchPopularMovies(pageNumber).unwrap();
-      } else if (type === "top_rated") {
+      } else if (type === MovieCategory.TOP_RATED) {
         response = await fetchTopRatedMovies(pageNumber).unwrap();
       }
     

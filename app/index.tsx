@@ -10,7 +10,7 @@ import COLORS from "@/config/COLORS";
 import HeaderButton from "@/components/HeaderButton";
 import { useState } from "react";
 import VerticalList from "@/components/VerticalList";
-import { Movie } from "@/interfaces/interfaces";
+import { CarouselType, Movie, MovieCategory } from "@/interfaces/interfaces";
 
 export default function Index() {
   const popularFilms = useGetPopularMoviesQuery('');
@@ -40,7 +40,7 @@ export default function Index() {
       {/* <Filters /> */}
       <CustomHeader
         // leftContent={<HeaderButton iconName='filter' onPress={filter} />}
-        rightContent={<HeaderButton iconName='heart-sharp' onPress={navigateToFavorite} />
+        rightContent={<HeaderButton iconName='bookmark' onPress={navigateToFavorite} />
         }
         additionalContent={
           <BlurView intensity={20} style={styles.searchContainer}>
@@ -64,24 +64,24 @@ export default function Index() {
             <View style={styles.groupHeaderContainer}>
               <Text style={styles.groupTitle}>Popular</Text>
               <TouchableOpacity onPress={() => {
-                router.push({ pathname: '/FilmsList', params: { type: 'popular' } });
+                router.push({ pathname: '/FilmsList', params: { type: MovieCategory.POPULAR } });
               }}>
                 <Text style={styles.seeAllButton}>View all</Text>
               </TouchableOpacity>
             </View>
-            <HorizontalCarousel type="movies" data={popularFilms.data?.results || []} />
+            <HorizontalCarousel type={CarouselType.MOVIE} data={popularFilms.data?.results || []} />
           </View>
 
           <View>
             <View style={styles.groupHeaderContainer}>
               <Text style={styles.groupTitle}>Top Rated</Text>
               <TouchableOpacity onPress={() => {
-                router.push({ pathname: '/FilmsList', params: { type: 'top_rated' } });
+                router.push({ pathname: '/FilmsList', params: { type: MovieCategory.TOP_RATED } });
               }}>
                 <Text style={styles.seeAllButton}>View all</Text>
               </TouchableOpacity>
             </View>
-            <HorizontalCarousel type="movies" data={topRatedFilms.data?.results || []} />
+            <HorizontalCarousel type={CarouselType.MOVIE} data={topRatedFilms.data?.results || []} />
           </View>
         </ScrollView>
       )}
@@ -92,7 +92,7 @@ export default function Index() {
 const styles = StyleSheet.create({
   searchContainer: {
     width: '100%',
-    height: 50,
+    height: 40,
     borderRadius: 15,
     overflow: 'hidden'
   },

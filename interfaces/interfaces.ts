@@ -96,3 +96,15 @@ export interface MovieCredits {
   cast: CastMember[];
   crew: CrewMember[];
 }
+
+export enum MovieCategory {
+  TOP_RATED = 'top_rated',
+  POPULAR = 'popular',
+  UPCOMING = 'upcoming',
+  NOW_PLAYING = 'now_playing'
+}
+
+export enum CarouselType {
+  MOVIE = 'movies',
+  CAST = 'cast',
+}

@@ -1,6 +1,6 @@
 import { Shadow } from 'react-native-shadow-2';
 import { useFetchMovieByIdMutation, useGetSingleFilmCreditsMutation } from "@/api/api";
-import { CastMember, MovieDetails } from "@/interfaces/interfaces";
+import { CarouselType, CastMember, MovieDetails } from "@/interfaces/interfaces";
 import { useLocalSearchParams } from "expo-router";
 import { useEffect } from "react";
 import { View, Text, Image, ScrollView, StyleSheet } from "react-native";
@@ -78,7 +78,7 @@ const Details = () => {
           <View style={styles.castContainer}>
             <Text style={styles.castTitle}>Cast</Text>
             <HorizontalCarousel
-              type="cast"
+              type={CarouselType.CAST}
               data={movieCredits || []}
             />
           </View>

@@ -1,16 +1,16 @@
 import { useRouter } from "expo-router";
 import { View, Image, StyleSheet, TouchableOpacity, Text } from "react-native";
 import { IMAGE_URI_BIG_SIZE } from "@/config/CONSTANT";
-import { CastMember, Movie } from "@/interfaces/interfaces";
+import { CarouselType, CastMember, Movie } from "@/interfaces/interfaces";
 
 interface CarouselItemProps {
   item: Movie | CastMember;
-  type: 'movies' | 'cast';
+  type: CarouselType;
 }
 
 const CarouselItem: React.FC<CarouselItemProps> = (props) => {
   const router = useRouter();
-  return props.type === 'movies' ? (
+  return props.type === CarouselType.MOVIE ? (
     <TouchableOpacity
       activeOpacity={1}
       onPress={() => router.push({ pathname: '/FilmDetails', params: { id: props?.item?.id } })}
